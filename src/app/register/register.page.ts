@@ -7,20 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['register.page.scss'],
 })
 export class RegisterPage {
-  username: string = ''; 
-  password: string = ''; 
+  username: string = '';
+  password: string = '';
 
-  
+
   registeredUsers: { username: string, password: string }[] = [];
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
 
   registerUser() {
     if (this.registeredUsers.find(user => user.username === this.username)) {
-      
+
       alert('El nombre de usuario ya está registrado.');
     } else {
-  
+
       this.registeredUsers.push({ username: this.username, password: this.password });
       this.router.navigate(['/login']);
     }

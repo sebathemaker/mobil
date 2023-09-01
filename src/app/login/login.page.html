@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Inicio de Sesión
+    </ion-title>
+
+    <ion-button slot="end" [routerLink]="['/home']" > ir a home </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="login()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Nombre de Usuario</ion-label>
+        <ion-input [(ngModel)]="username" name="username" type="text" required></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Contraseña</ion-label>
+        <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-button [routerLink]="['/inicio']">Go to inicio</ion-button>
+    <ion-button [routerLink]="['/resetpassword']">Go toresetpassword</ion-button>
+  </form>
+</ion-content>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-login',
@@ -11,17 +11,14 @@ export class LoginPage {
   username: string = '';
   password: string = '';
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) {}
 
   login() {
-    // Aquí puedes verificar las credenciales del usuario y redirigirlo si es válido
-    // Por ejemplo, puedes usar un servicio de autenticación o una API para validar los datos ingresados por el usuario
-    // Si las credenciales son válidas, puedes redirigir al usuario a la página principal
-    // Ejemplo:
     if (this.username === 'usuario' && this.password === 'contraseña') {
-      this.router.navigate(['/home']); // Redirige a la página principal (ajusta la ruta según tu estructura de rutas)
+      this.userService.setCurrentUser({ username: this.username });
+      console.log('Usuario autenticado:', this.userService.getCurrentUser());
+      this.router.navigate(['/home']); 
     } else {
-      // Maneja el caso de credenciales incorrectas aquí
       console.log('Credenciales incorrectas');
     }
   }

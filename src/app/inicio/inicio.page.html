@@ -1,13 +1,26 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>
-      Inicio
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-split-pane when="xs" contentId="main">
+  <ion-menu contentId="main">
+    <ion-header>
+      <ion-toolbar color="tertiary">
+        <ion-title>Alumno</ion-title>
+      </ion-toolbar>
+      <div id="nombres">
+        <ion-note >nat.pino@duocucc.cl</ion-note>
+      </div>
+      
+    </ion-header>
+    <ion-content class="ion-padding"> Content </ion-content>
+  
+       
 
-<ion-content>
-  <ion-label>
-    Bienvenido {{ username }}
-  </ion-label>
-</ion-content>
+  </ion-menu>
+
+  <div class="ion-page" id="main">
+    <ion-header>
+      <ion-toolbar>
+        <ion-title>Main View</ion-title>
+      </ion-toolbar>
+    </ion-header>
+    <ion-content class="ion-padding"> Main View Content </ion-content>
+  </div>
+</ion-split-pane>

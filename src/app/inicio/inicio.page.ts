@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserModel } from '../models/UserModel'; // Importa UserModel si es necesario
+import { UserModel } from '../models/UserModel'; 
 
 @Component({
   selector: 'app-inicio',

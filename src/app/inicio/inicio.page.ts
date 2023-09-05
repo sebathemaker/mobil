@@ -18,16 +18,18 @@ export class InicioPage implements OnInit {
     new UserModel('Esperanza','Alvarez','eAlvarez@gmail.com',undefined,'ADMIN','ealvarez','ealva123')
   ];
 
-
   constructor(private router: Router) {}
 
   ngOnInit() {
-    const foundUser = this.listUser.find((user) => user.username === this.username);
-    this.currentUser = foundUser || null;
+  
+    this.currentUser = this.listUser[0]; 
+
+    if (this.currentUser) {
+      this.username = this.currentUser.username;
+    }
   }
 
   navigateToOption(option: string) {
-    
     switch (option) {
       case 'Opción 1':
         this.router.navigate(['/opcion1']);
@@ -41,9 +43,7 @@ export class InicioPage implements OnInit {
   }
 
   logout() {
-    
     this.currentUser = null;
     this.router.navigate(['/login']);
   }
 }
-

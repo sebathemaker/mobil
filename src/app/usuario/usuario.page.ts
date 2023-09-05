@@ -25,5 +25,7 @@ export class UsuarioPage implements OnInit {
 
   ngOnInit() {
   }
-
+  navigateToInicio() {
+    this.router.navigate(['/inicio']); // Redirige a la página 'inicio.page.html'
+  }
 }

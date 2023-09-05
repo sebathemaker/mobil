@@ -38,8 +38,7 @@ export class ResetpasswordPage {
   }
 
   async requestPasswordReset() {
-    // Implementa la lógica para solicitar el restablecimiento de contraseña aquí
-    // Puedes usar this.username para identificar al usuario
+    
 
 
     this.passwordReset = true;

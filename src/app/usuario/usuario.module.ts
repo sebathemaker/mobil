@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { LoginPage } from './login.page';
+import { UsuarioPage } from './usuario.page'; 
 @NgModule({
   declarations: [],
   imports: [
@@ -9,9 +9,9 @@ import { LoginPage } from './login.page';
     RouterModule.forChild([
       {
         path: '',
-        component: LoginPage, 
+        component: UsuarioPage, 
       },
     ]),
   ],
 })
-export class LoginPageModule {}
+export class UsuarioPageModule {}

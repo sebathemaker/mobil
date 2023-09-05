@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../user.service';
 import { Router } from '@angular/router';
+import { UserModel } from '../models/UserModel'; // Importa UserModel si es necesario
 
 @Component({
   selector: 'app-inicio',
@@ -9,39 +9,40 @@ import { Router } from '@angular/router';
 })
 export class InicioPage implements OnInit {
   username: string = '';
+  currentUser: UserModel | null = null;
 
-  constructor(private userService: UserService, private router: Router) {}
+  listUser: UserModel[] = [
+    new UserModel('Pedro','Gomez','pgomez@gmail.com',undefined,'USUARIO','pgomez','pedro123'),
+    new UserModel('Juan','Pablo','jpablo@gmail.com',undefined,'ADMIN','jpablo','jpablo123'),
+    new UserModel('Carlos','mancilla','cmancilla@gmail.com',undefined,'USUARIO','cmancilla','camall123'),
+    new UserModel('Esperanza','Alvarez','eAlvarez@gmail.com',undefined,'ADMIN','ealvarez','ealva123')
+  ];
+
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
-    const currentUser = this.userService.getCurrentUser();
-    if (currentUser) {
-      this.username = currentUser.username;
-    }
+    const foundUser = this.listUser.find((user) => user.username === this.username);
+    this.currentUser = foundUser || null;
   }
 
   navigateToOption(option: string) {
-    // Lógica para manejar las opciones del menú
-    // Puedes redirigir a otras páginas según la opción seleccionada
+    
     switch (option) {
       case 'Opción 1':
-        // Redirigir a la página correspondiente
         this.router.navigate(['/opcion1']);
         break;
       case 'Opción 2':
-        // Redirigir a la página correspondiente
         this.router.navigate(['/opcion2']);
         break;
       default:
-        // Manejar otras opciones si es necesario
         break;
     }
   }
 
   logout() {
-    // Realizar la lógica de cierre de sesión, por ejemplo, limpiar el usuario actual
-    this.userService.setCurrentUser({ username: '' });
-
-    // Redirigir a la página de inicio de sesión
+    
+    this.currentUser = null;
     this.router.navigate(['/login']);
   }
 }

@@ -4,12 +4,13 @@
     justify-content: center;
 }
 
+ion-input {
+    padding: 50%;
+}
+
 .example-content {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100%;
-}
-.example-form-field {
-    width: 200px;
-}
+  }

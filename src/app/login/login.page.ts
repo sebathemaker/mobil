@@ -1,28 +1,64 @@
-import { Component } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
+import { Router, NavigationExtras, RouterLinkWithHref } from '@angular/router';
+import { IUserLogin } from '../models/IUserLogin';
+import { UserModel } from '../models/UserModel';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
+  standalone: true,
+  imports: [IonicModule, CommonModule, RouterLinkWithHref, FormsModule]
 })
-export class LoginPage {
-  username: string = '';
-  password: string = '';
+export class LoginPage implements OnInit {
+  listUser: UserModel[] = [
+    new UserModel('Pedro', 'Gomez', 'pgomez@gmail.com', undefined, 'USUARIO', 'pgomez', 'pedro123'),
+    new UserModel('Juan', 'Pablo', 'jpablo@gmail.com', undefined, 'ADMIN', 'jpablo', 'jpablo123'),
+    new UserModel('Carlos', 'mancilla', 'cmancilla@gmail.com', undefined, 'USUARIO', 'cmancilla', 'camall123'),
+    new UserModel('Esperanza', 'Alvarez', 'eAlvarez@gmail.com', undefined, 'ADMIN', 'ealvarez', 'ealva123')
+  ];
 
-  constructor(private router: Router) { }
+  userLoginModal: IUserLogin = {
+    username: '',
+    password: ''
+  };
 
-  login() {
-    // Aquí puedes verificar las credenciales del usuario y redirigirlo si es válido
-    // Por ejemplo, puedes usar un servicio de autenticación o una API para validar los datos ingresados por el usuario
-    // Si las credenciales son válidas, puedes redirigir al usuario a la página principal
-    // Ejemplo:
-    if (this.username === 'usuario' && this.password === 'contraseña') {
-      this.router.navigate(['/home']); // Redirige a la página principal (ajusta la ruta según tu estructura de rutas)
-    } else {
-      // Maneja el caso de credenciales incorrectas aquí
-      console.log('Credenciales incorrectas');
+  errorMensaje: string = ''; 
+
+  constructor(private route: Router) { }
+
+  ngOnInit() {
+    this.userLoginModalRestart();
+  }
+
+  userLogin(userLoginInfo: IUserLogin): boolean {
+    for (let i = 0; i < this.listUser.length; i++) {
+      if ((this.listUser[i].username == userLoginInfo.username) && (this.listUser[i].password == userLoginInfo.password)) {
+        console.log('User Loged...', this.userLoginModal.username, this.userLoginModal.password);
+        let userInfoSend: NavigationExtras = {
+          state: {
+            user: this.listUser[i]
+          }
+        }
+        if (this.listUser[i].type == 'USUARIO') {
+          let sendInfo = this.route.navigate(['/usuario'], userInfoSend);
+          return true;
+        } else {
+          let sendInfo = this.route.navigate(['/admin'], userInfoSend);
+          return true;
+        }
+      }
     }
+    this.errorMensaje = 'Usuario no válido o contraseña incorrecta. Por favor, inténtalo de nuevo.'; 
+    this.userLoginModalRestart();
+    return false;
+  }
+
+  userLoginModalRestart(): void {
+    this.userLoginModal.username = '';
+    this.userLoginModal.password = '';
   }
 }

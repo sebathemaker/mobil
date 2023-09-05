@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserModel } from '../models/UserModel'; 
 
 @Component({
   selector: 'app-inicio',
@@ -6,13 +8,42 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./inicio.page.scss'],
 })
 export class InicioPage implements OnInit {
-  username!: string; 
+  username: string = '';
+  currentUser: UserModel | null = null;
 
-  constructor() {}
+  listUser: UserModel[] = [
+    new UserModel('Pedro','Gomez','pgomez@gmail.com',undefined,'USUARIO','pgomez','pedro123'),
+    new UserModel('Juan','Pablo','jpablo@gmail.com',undefined,'ADMIN','jpablo','jpablo123'),
+    new UserModel('Carlos','mancilla','cmancilla@gmail.com',undefined,'USUARIO','cmancilla','camall123'),
+    new UserModel('Esperanza','Alvarez','eAlvarez@gmail.com',undefined,'ADMIN','ealvarez','ealva123')
+  ];
+
+  constructor(private router: Router) {}
 
   ngOnInit() {
-   
-    this.username = 'nombre_usuario'; 
+  
+    this.currentUser = this.listUser[0]; 
+
+    if (this.currentUser) {
+      this.username = this.currentUser.username;
+    }
+  }
+
+  navigateToOption(option: string) {
+    switch (option) {
+      case 'Opción 1':
+        this.router.navigate(['/opcion1']);
+        break;
+      case 'Opción 2':
+        this.router.navigate(['/opcion2']);
+        break;
+      default:
+        break;
+    }
+  }
+
+  logout() {
+    this.currentUser = null;
+    this.router.navigate(['/login']);
   }
 }
-

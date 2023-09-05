@@ -1,39 +1,57 @@
 import { Component } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 
+import { UserModel } from '../models/UserModel';
+
 @Component({
   selector: 'app-resetpassword',
   templateUrl: 'resetpassword.page.html',
   styleUrls: ['resetpassword.page.scss'],
 })
 export class ResetpasswordPage {
-  username: string = ''; 
-  newPassword: string = ''; 
-  passwordReset: boolean = false; 
+  username: string = '';
+  newPassword: string = '';
+  passwordReset: boolean = false;
+  currentUser: UserModel | null = null;
 
-  registeredUsernames: string[] = ['usuario1', 'usuario2', 'usuario3'];
-  
-  constructor(private alertController: AlertController) {} 
-  
-  requestPasswordReset() {
-    if (this.registeredUsernames.includes(this.username)) {
-      this.passwordReset = true;
-    } else {
-      this.presentErrorAlert(); 
-    }
-  }
-  
-  async presentErrorAlert() {
+
+  constructor(private alertController: AlertController) {}
+
+  async presentSuccessAlert(message: string) {
     const alert = await this.alertController.create({
-      header: 'Error',
-      message: 'Nombre de usuario no encontrado.',
+      header: 'Éxito',
+      message: message,
       buttons: ['OK'],
     });
-  
+
     await alert.present();
   }
 
-  resetPassword() {
-    console.log('Nueva contraseña:', this.newPassword);
+  async presentErrorAlert(message: string) {
+    const alert = await this.alertController.create({
+      header: 'Error',
+      message: message,
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  async requestPasswordReset() {
+    
+
+
+    this.passwordReset = true;
+    this.presentSuccessAlert('Solicitud de restablecimiento de contraseña enviada.');
+  }
+
+  async resetPassword() {
+
+    if (this.currentUser && this.passwordReset) {
+      
+      this.presentSuccessAlert('Contraseña restablecida correctamente.');
+    } else {
+      this.presentErrorAlert('Solicita el restablecimiento de contraseña antes de cambiarla.');
+    }
   }
 }

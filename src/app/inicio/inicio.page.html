@@ -1,26 +1,32 @@
-<ion-split-pane when="xs" contentId="main">
-  <ion-menu contentId="main">
-    <ion-header>
-      <ion-toolbar color="tertiary">
-        <ion-title>Alumno</ion-title>
-      </ion-toolbar>
-      <div id="nombres">
-        <ion-note >nat.pino@duocucc.cl</ion-note>
+<ion-header>
+  <ion-toolbar>
+    <!-- <ion-title>Bienvenido, {{ username }}</ion-title> -->
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
+
+    <ion-split-pane when="xs" contentId="main">
+      <ion-menu contentId="main">
+        <ion-header>
+          <ion-toolbar color="tertiary">
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content class="ion-padding"> Menu Content </ion-content>
+      </ion-menu>
+    
+      <div class="ion-page" id="main">
+        <ion-header [translucent]="true">
+          <ion-toolbar>
+            <ion-title>Bienvenido, {{ currentUser?.name }}{{ currentUser?.last_name }}</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        
+        <ion-content class="ion-padding"> Main View Content </ion-content>
       </div>
-      
-    </ion-header>
-    <ion-content class="ion-padding"> Content </ion-content>
-  
-       
+    </ion-split-pane>
+  </ion-toolbar>
 
-  </ion-menu>
-
-  <div class="ion-page" id="main">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title>Main View</ion-title>
-      </ion-toolbar>
-    </ion-header>
-    <ion-content class="ion-padding"> Main View Content </ion-content>
-  </div>
-</ion-split-pane>
+</ion-header>

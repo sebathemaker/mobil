@@ -1,4 +1,9 @@
-nombres{
-    position: relative;
-    left: 20px;
+ion-menu::part(backdrop) {
+    background-color: rgba(255, 0, 255, 0.5);
+}
+
+ion-menu::part(container) {
+    box-shadow: 4px 0px 16px rgba(255, 0, 255, 0.18);
+    
+    
 }

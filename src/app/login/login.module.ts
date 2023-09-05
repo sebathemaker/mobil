@@ -17,7 +17,7 @@ const routes: Routes = [
     CommonModule,
     FormsModule,
     IonicModule,
-    RouterModule.forChild(routes), // Configura las rutas para este módulo
+    RouterModule.forChild(routes), 
   ],
   
 })

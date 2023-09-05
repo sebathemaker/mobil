@@ -26,7 +26,7 @@ export class LoginPage implements OnInit {
     password: ''
   };
 
-  errorMensaje: string = ''; // Agrega la variable de mensaje de error
+  errorMensaje: string = ''; 
 
   constructor(private route: Router) { }
 
@@ -52,7 +52,7 @@ export class LoginPage implements OnInit {
         }
       }
     }
-    this.errorMensaje = 'Usuario no válido o contraseña incorrecta. Por favor, inténtalo de nuevo.'; // Establece el mensaje de error
+    this.errorMensaje = 'Usuario no válido o contraseña incorrecta. Por favor, inténtalo de nuevo.'; 
     this.userLoginModalRestart();
     return false;
   }

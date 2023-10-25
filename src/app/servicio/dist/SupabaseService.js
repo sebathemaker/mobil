@@ -8,28 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SupabaseService = void 0;
 var core_1 = require("@angular/core");
-var supabase_js_1 = require("@supabase/supabase-js");
 var http_1 = require("@angular/common/http");
 var supabase_constants_1 = require("./supabase.constants");
 var SupabaseService = /** @class */ (function () {
     function SupabaseService(httpClient) {
         this.httpClient = httpClient;
-        this.supabaseUrl = 'https://mioynnzefjjpspojuedl.susupapabase.co';
+        this.supabaseUrl = 'https://mioynnzefjjpspojuedl.susupapabase.co/rest/v1/';
         this.supabaseKey = process.env.SUPABASE_KEY;
-        this.supabase = supabase_js_1.createClient(supabaseUrl, supabase_constants_1.supabaseKey);
     }
     SupabaseService.prototype.getAll = function () {
-        this.httpClient.get('https://mioynnzefjjpspojuedl.supabase.co', {
+        this.httpClient.get(this.supabaseUrl + 'alumno', {
             headers: new http_1.HttpHeaders({ apikey: supabase_constants_1.supabaseKey })
         });
     };
     SupabaseService.prototype.post = function () {
-        this.httpClient.post('https://mioynnzefjjpspojuedl.supabase.co', {
+        this.httpClient.post(this.supabaseUrl + 'alumno', {
             Headers: new http_1.HttpHeaders({ apikey: supabase_constants_1.supabaseKey })
         });
     };
     SupabaseService.prototype.put = function () {
-        this.httpClient.put('https://mioynnzefjjpspojuedl.supabase.co', {
+        this.httpClient.put(this.supabaseUrl + 'alumno', {
             Headers: new http_1.HttpHeaders({ apikey: supabase_constants_1.supabaseKey })
         });
     };

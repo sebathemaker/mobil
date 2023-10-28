@@ -1,34 +1,62 @@
-ion-content {
-  --background: #000000;
-}
-
-ion-title {
+@charset "UTF-8";
+ion-card.center-card {
   text-align: center;
+  max-width: 400px;
+  /* Ajusta el ancho máximo de la tarjeta según tu preferencia */
+  margin: 0 auto;
+  /* Centra la tarjeta en la página horizontalmente */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Sombra suave */
 }
 
-ion-button {
-  margin-top: 16px;
-}
-
-h1 {
+ion-card-title {
   font-size: 24px;
+  /* Tamaño del título */
   font-weight: bold;
   margin-bottom: 16px;
 }
 
-ion-label {
-  font-size: 16px;
+ion-card-subtitle {
+  font-size: 18px;
+  /* Tamaño del subtítulo */
   margin-bottom: 16px;
 }
 
+ion-img {
+  max-width: 100%;
+  /* Ajusta el ancho máximo de la imagen */
+}
+
+ion-item {
+  margin-bottom: 16px;
+  /* Espacio entre elementos del formulario */
+}
+
 ion-input {
-  font-size: 14px;
+  font-size: 16px;
+  /* Tamaño de fuente del formulario */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
 }
 
-ion-button[expand=full] {
+ion-button.custom-button {
   --background: #007bff;
-  color: white;
+  /* Color de fondo del botón */
+  color: black;
+  margin-top: 16px;
+  /* Espacio entre botones */
+}
+
+.custom-background {
+  --background: #000000;
+  /* Color de fondo del ion-content */
+}
+
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* Centra verticalmente el contenido */
 }

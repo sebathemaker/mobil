@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserModel } from '../models/UserModel'; 
+import { SupabaseService } from '../servicio/supabaseservice';
+import { UserModel } from '../models/UserModel';
 
 @Component({
   selector: 'app-inicio',
@@ -11,22 +12,56 @@ export class InicioPage implements OnInit {
   username: string = '';
   currentUser: UserModel | null = null;
 
-  listUser: UserModel[] = [
-    new UserModel('Pedro','Gomez','pgomez@gmail.com',undefined,'USUARIO','pgomez','pedro123'),
-    new UserModel('Juan','Pablo','jpablo@gmail.com',undefined,'ADMIN','jpablo','jpablo123'),
-    new UserModel('Carlos','mancilla','cmancilla@gmail.com',undefined,'USUARIO','cmancilla','camall123'),
-    new UserModel('Esperanza','Alvarez','eAlvarez@gmail.com',undefined,'ADMIN','ealvarez','ealva123')
-  ];
-
-  constructor(private router: Router) {}
+  constructor(private router: Router, private supabaseService: SupabaseService) {}
 
   ngOnInit() {
-  
-    this.currentUser = this.listUser[0]; 
+    this.obtenerDatosUsuario(1);
+  }
 
-    if (this.currentUser) {
-      this.username = this.currentUser.username;
-    }
+  obtenerDatosUsuario(userId: number) {
+    this.supabaseService.getUsuarioActual(userId).then(
+      (usuario: any) => {
+        this.currentUser = usuario;
+        this.username = usuario.name;
+  
+        if (usuario.tipo === 'alumno') {
+          this.obtenerDatosAlumno(usuario.id);
+        } else if (usuario.tipo === 'profesor') {
+          this.obtenerDatosProfesor(usuario.id);
+        }
+      },
+      (error: any) => {
+        console.error('Error al obtener datos del usuario', error);
+      }
+    );
+  }
+
+  obtenerDatosAlumno(alumnoId: number) {
+    this.supabaseService.getAllAlumno().subscribe(
+      (alumnos: any) => {
+        const alumno = alumnos.find((a: any) => a.id === alumnoId);
+        if (alumno) {
+          console.log('Datos del alumno:', alumno);
+        }
+      },
+      (error: any) => {
+        console.error('Error al obtener datos del alumno', error);
+      }
+    );
+  }
+
+  obtenerDatosProfesor(profesorId: number) {
+    this.supabaseService.getAllProfesor().subscribe(
+      (profesores: any) => {
+        const profesor = profesores.find((p: any) => p.id === profesorId);
+        if (profesor) {
+          console.log('Datos del profesor:', profesor);
+        }
+      },
+      (error: any) => {
+        console.error('Error al obtener datos del profesor', error);
+      }
+    );
   }
 
   navigateToOption(option: string) {

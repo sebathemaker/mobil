@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { createClient } from '@supabase/supabase-js';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { supabaseKey } from './supabase.constants';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
     providedIn: 'root',
@@ -10,6 +12,7 @@ export class SupabaseService {
 
     private supabaseUrl = 'https://mioynnzefjjpspojuedl.susupapabase.co/rest/v1/';
     private supabaseKey = supabaseKey;
+    private supabase = createClient(this.supabaseUrl, this.supabaseKey);
 
     constructor(private readonly httpClient: HttpClient) { }
 
@@ -61,11 +64,15 @@ export class SupabaseService {
         });
     }
 
-    putAsistencia() {
-        return this.httpClient.put(this.supabaseUrl + 'asistencia', null, {
+    putAsistenciaalumno(id: number, presente: boolean) {
+        const url = `${this.supabaseUrl}asistenciaalumno?id=eq.${id}`;
+        const body = { presente: presente };
+
+        return this.httpClient.patch(url, body, {
             headers: new HttpHeaders({ apikey: this.supabaseKey })
         });
     }
+
 
     getAllAsistenciaAlumno() {
         return this.httpClient.get(this.supabaseUrl + 'asistenciaalumno', {
@@ -138,4 +145,19 @@ export class SupabaseService {
             headers: new HttpHeaders({ apikey: this.supabaseKey })
         });
     }
+    getUsuarioActual(userId: number) {
+        return this.supabase
+            .from('usuarios')
+            .select('*')
+            .eq('id', userId)
+            .single()
+            .then((response: any) => {
+                if (response.error) {
+                    throw response.error;
+                }
+                return response.data;
+            });
+    }
+
+
 }

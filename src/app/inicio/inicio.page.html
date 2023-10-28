@@ -14,7 +14,15 @@
             <ion-title>Menu</ion-title>
           </ion-toolbar>
         </ion-header>
-        <ion-content class="ion-padding"> Menu Content </ion-content>
+        <ion-content class="ion-padding">
+          <ion-list>
+            
+            <ion-item [routerLink]="['/asistencia-alumno']">
+              <ion-icon slot="start" name="checkmark"></ion-icon>
+              Asistencia de Alumnos
+            </ion-item>
+          </ion-list>
+        </ion-content>
       </ion-menu>
     
       <div class="ion-page" id="main">
@@ -28,5 +36,4 @@
       </div>
     </ion-split-pane>
   </ion-toolbar>
-
 </ion-header>

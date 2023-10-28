@@ -4,45 +4,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true" class="ion-padding">
+<ion-content [fullscreen]="true" class="custom-background">
   <ion-grid class="ion-no-padding ion-align-items-center ion-justify-content-center">
     <ion-row *ngIf="errorMensaje">
       <ion-col size="12" class="ion-text-center">
         <ion-text color="danger">{{ errorMensaje }}</ion-text>
       </ion-col>
     </ion-row>
-    
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <h1>Bienvenido</h1>
-      </ion-col>
-    </ion-row>
-    
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-label>Ingrese sus datos</ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-input placeholder="Nombre de usuario" [(ngModel)]="userLoginModal.username"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-input placeholder="Contraseña" [(ngModel)]="userLoginModal.password" type="password"></ion-input>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-button expand="full" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col size="12" class="ion-text-center">
-        <ion-button expand="full" [routerLink]="['/resetpassword']">¿Olvidó su contraseña?</ion-button>
-      </ion-col>
-    </ion-row>
+
+    <!-- Aquí comienza el ion-card con la imagen y el formulario -->
+    <ion-card class="center-card">
+      <ion-card-content>
+        <ion-card-title>Bienvenido</ion-card-title>
+        <ion-card-subtitle>Ingrese sus datos</ion-card-subtitle>
+        <ion-img src="assets/icon/usua.png" alt="Imagen de Inicio de Sesión"></ion-img>
+        <ion-item>
+          <ion-label position="floating">Nombre de usuario</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.username"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input [(ngModel)]="userLoginModal.password" type="password"></ion-input>
+        </ion-item>
+        <ion-button class="custom-button" expand="full" (click)="userLogin(userLoginModal)">Ingresar</ion-button>
+        <ion-button class="custom-button" expand="full" [routerLink]="['/resetpassword']">¿Olvidó su contraseña?</ion-button>
+      </ion-card-content>
+    </ion-card>
+    <!-- Aquí finaliza el ion-card -->
   </ion-grid>
 </ion-content>
-

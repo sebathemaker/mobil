@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Información De Cuenta</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="navigateToInicio()">
+      <ion-button href="Inicio">
         Inicio
       </ion-button>
     </ion-buttons>
@@ -10,9 +10,6 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="light">
-
-|
-
 
   <h1 class="center-content" style="padding-bottom: 50px">Bienvenido {{ userInfoReceived?.name }}</h1>
   <ion-list [inset]="true">

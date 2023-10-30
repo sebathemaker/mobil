@@ -8,6 +8,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 exports.__esModule = true;
 exports.SupabaseService = void 0;
 var core_1 = require("@angular/core");
+var supabase_js_1 = require("@supabase/supabase-js");
 var http_1 = require("@angular/common/http");
 var supabase_constants_1 = require("./supabase.constants");
 var SupabaseService = /** @class */ (function () {
@@ -15,6 +16,7 @@ var SupabaseService = /** @class */ (function () {
         this.httpClient = httpClient;
         this.supabaseUrl = 'https://mioynnzefjjpspojuedl.susupapabase.co/rest/v1/';
         this.supabaseKey = supabase_constants_1.supabaseKey;
+        this.supabase = supabase_js_1.createClient(this.supabaseUrl, this.supabaseKey);
     }
     SupabaseService.prototype.getAllAlumno = function () {
         return this.httpClient.get(this.supabaseUrl + 'alumno', {
@@ -56,8 +58,10 @@ var SupabaseService = /** @class */ (function () {
             headers: new http_1.HttpHeaders({ apikey: this.supabaseKey })
         });
     };
-    SupabaseService.prototype.putAsistencia = function () {
-        return this.httpClient.put(this.supabaseUrl + 'asistencia', null, {
+    SupabaseService.prototype.putAsistenciaalumno = function (id, presente) {
+        var url = this.supabaseUrl + "asistenciaalumno?id=eq." + id;
+        var body = { presente: presente };
+        return this.httpClient.patch(url, body, {
             headers: new http_1.HttpHeaders({ apikey: this.supabaseKey })
         });
     };
@@ -119,6 +123,19 @@ var SupabaseService = /** @class */ (function () {
     SupabaseService.prototype.putSeccionAlumno = function () {
         return this.httpClient.put(this.supabaseUrl + 'seccionalumno', null, {
             headers: new http_1.HttpHeaders({ apikey: this.supabaseKey })
+        });
+    };
+    SupabaseService.prototype.getUsuarioActual = function (userId) {
+        return this.supabase
+            .from('usuarios')
+            .select('*')
+            .eq('id', userId)
+            .single()
+            .then(function (response) {
+            if (response.error) {
+                throw response.error;
+            }
+            return response.data;
         });
     };
     SupabaseService = __decorate([
